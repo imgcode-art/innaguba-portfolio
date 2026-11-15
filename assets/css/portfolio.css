@@ -3,9 +3,9 @@
 
 /* Neutral palette: warm grey paper, near-black band, one quiet taupe accent; overrides the green of main.css and matches the CV */
 :root{
-  --paper:#F5F4F1; --sand:#ECEAE5; --night:#1E1D1B; --ink:#171514; --body:#3E3B37; --mute:#6E6A64; --line:#DCD9D3;
-  --walnut:#6E5E4E; --logo-accent:#6E5E4E; --cream:#F2EFEA; --gold:#CFC4B6; --frame:#ECEAE6; --frame-line:#DEDBD5;
-  --sand-line:#D6D2CB; --night-line:#3A3835; --night-mute:#A39C92; --night-text:#C9C3BA; --head-bg:rgba(245,244,241,.92); --shadow:30,29,27;
+  --paper:#FFFFFF; --sand:#F2F1EE; --night:#1C1C1C; --ink:#171514; --body:#3E3B37; --mute:#6E6A64; --line:#E3E0DB;
+  --walnut:#6B6B6B; --logo-accent:#6B6B6B; --cream:#F4F4F4; --gold:#BDBDBD; --frame:#F3F2EF; --frame-line:#E4E1DC;
+  --sand-line:#D6D2CB; --night-line:#3A3A3A; --night-mute:#9C9C9C; --night-text:#C8C8C8; --head-bg:rgba(255,255,255,.92); --shadow:28,28,28;
 }
 
 .hero h1{max-width:1100px;font-size:clamp(50px,8vw,104px)}
