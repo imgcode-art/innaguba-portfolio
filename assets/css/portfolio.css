@@ -1,56 +1,120 @@
 /* portfolio.innaguba.com — the job portfolio. Builds on main.css (same type, colours and rhythm as design.innaguba.com);
-   only what the hiring version needs is added here: one featured case study, a quiet grid of the rest, flat cards, no sales blocks. */
+   everything I do gets equal weight: disciplines, one filterable grid of projects, photography band, about, contact. */
+
+/* Neutral palette: warm grey paper, near-black band, one quiet taupe accent; overrides the green of main.css and matches the CV */
+:root{
+  --paper:#F5F4F1; --sand:#ECEAE5; --night:#1E1D1B; --ink:#171514; --body:#3E3B37; --mute:#6E6A64; --line:#DCD9D3;
+  --walnut:#6E5E4E; --logo-accent:#6E5E4E; --cream:#F2EFEA; --gold:#CFC4B6; --frame:#ECEAE6; --frame-line:#DEDBD5;
+  --sand-line:#D6D2CB; --night-line:#3A3835; --night-mute:#A39C92; --night-text:#C9C3BA; --head-bg:rgba(245,244,241,.92); --shadow:30,29,27;
+}
 
 .hero h1{max-width:1100px;font-size:clamp(50px,8vw,104px)}
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:18px}
 .hero-actions .btn{width:290px;text-align:center}
 
-.kind{font-size:14px;color:var(--mute)}
-.card-links{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:baseline}
-.card-links .live{font-size:15px;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px;white-space:nowrap}
+/* What I do: five disciplines on one line, numbered, hairline on top */
+.disc{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(20px,2.4vw,32px);margin:40px 0 0;padding:0}
+.disc li{padding-top:18px;border-top:1px solid var(--line)}
+.disc h3{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;color:var(--ink)}
+.disc p{font-size:15px}
+.ai-line{margin-top:40px;padding:18px 22px;background:var(--frame);border-left:2px solid var(--walnut);font-size:16px}
+.ai-line b{font-weight:500;color:var(--ink)}
 
-/* Featured case study: image and text side by side, hairlines instead of a coloured card */
-.feature{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);align-items:center;padding-bottom:clamp(48px,6vw,72px);border-bottom:1px solid var(--line)}
-.feature-img{display:block}
-.feature-text{display:flex;flex-direction:column;gap:18px}
-.feature-title,.card-title{font-family:var(--serif);font-weight:300;line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
-.feature-title{font-size:clamp(34px,3.4vw,50px)}
-.feature-title em,.card-title em{color:var(--walnut)}
-.feature-facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 24px;margin:4px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:15px}
-.feature-facts dt{color:var(--mute)}
-.feature-facts dd{margin:0;color:var(--ink)}
+/* Filters */
+.work-head{flex-wrap:wrap;gap:16px 32px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:inherit;font-size:14px;padding:8px 16px;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;transition:border-color .2s ease,background .2s ease,color .2s ease}
+.filters button:hover{border-color:var(--ink)}
+.filters button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
-/* The rest of the web work: three equal columns */
-.work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,3vw,40px);margin-top:clamp(48px,6vw,72px)}
-.card{display:flex;flex-direction:column;gap:12px}
-.card-img{display:block;margin-bottom:8px;padding:clamp(12px,1.6vw,20px);background:var(--frame)}
-.card-title{font-size:clamp(28px,2.4vw,34px)}
-.card p:not(.kind){font-size:16px}
-.card .card-links{margin-top:auto;padding-top:6px}
+/* Project grid: every project the same size, whatever the discipline */
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(44px,5vw,64px) clamp(28px,3vw,40px)}
+.pcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--body)}
+.pcard[hidden]{display:none}
+.pmedia{display:block;aspect-ratio:3/2;overflow:hidden;margin-bottom:8px;background:var(--frame)}
+.pmedia img,.pmedia video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.pmedia.frame{padding:clamp(14px,2vw,26px)}
+.pmedia.frame img{object-fit:contain}
+.pcard:hover .pmedia img,.pcard:hover .pmedia video{transform:scale(1.02)}
+.tags{font-size:14px;color:var(--mute)}
+.ptitle{font-family:var(--serif);font-weight:300;font-size:clamp(28px,2.6vw,36px);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
+.ptitle em{color:var(--walnut)}
+.pdesc{font-size:16px;max-width:520px}
 
-/* Brand and photography: smaller, image first, one line each */
-.brand-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.4vw,32px)}
-.mini{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink)}
-.mini img{width:100%;aspect-ratio:4/3;object-fit:cover;margin-bottom:8px}
-.mini-title{font-family:var(--serif);font-size:24px;line-height:1.2}
-.mini:hover .mini-title{color:var(--walnut)}
-
-/* Photography band: three of my own photos, the bridge between the two crafts */
+/* Photography band */
 .strip3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);max-width:960px;margin:clamp(40px,5vw,56px) auto 0}
 .strip3 img{width:100%;aspect-ratio:2/3;object-fit:cover}
 .strip-text{max-width:620px;margin:32px auto 0;color:var(--night-text)}
 
+.about-lead{font-size:30px}
+.facts{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
 .site-foot .foot-bar{border-top:0;padding-top:32px}
 
-@media (max-width:900px){
-  .feature{grid-template-columns:1fr}
-  .work-grid{grid-template-columns:1fr}
-  .brand-grid{grid-template-columns:1fr 1fr}
+@media (max-width:1000px){
+  .disc{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .pgrid{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   .hero-actions{align-self:stretch}
   .hero-actions .btn{width:100%;white-space:normal}
-  .brand-grid{grid-template-columns:1fr}
+  .disc{grid-template-columns:1fr}
   .strip3 img:nth-child(3){display:none}
   .strip3{grid-template-columns:1fr 1fr}
+}
+
+/* main.css zeroes this for the design site; here the grid is followed by the dark band and needs its air back */
+#work{padding-bottom:clamp(72px,9vw,110px)}
+.btn-night{margin-top:36px;background:none;color:var(--cream);border-color:var(--cream)}
+.btn-night:hover{background:var(--cream);color:var(--night)}
+.band-night .strip-text{margin-top:24px}
+
+/* ===== Type system, same as the CV =====
+   Two families only: Manrope for everything you read, Cormorant for display headings.
+   Italic appears twice: the hero accent and the dark band. One eyebrow style (CV section label) for every small label and button.
+   Scale: display / h2 / title 30 / body 16 / eyebrow 12. */
+@font-face{font-family:'Manrope';font-weight:300 800;font-display:swap;src:url(../fonts/manrope-latin.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-weight:300 800;font-display:swap;src:url(../fonts/manrope-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF}
+:root{--sans:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif}
+body{font-size:16px;line-height:1.7}
+
+/* the eyebrow */
+.label,.hero .label,.kind,.tags,.band-night .kicker,.contact .label,.btn,.filters button,.reviews-label{
+  font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
+.label,.kind,.tags{color:var(--mute)}
+.hero .label{color:var(--walnut)}
+.contact .label{color:var(--walnut)}
+.btn{padding:17px 28px}
+.filters button{padding:9px 16px;letter-spacing:.12em}
+
+/* header: wordmark set like the CV name */
+.site-head .name{font-family:var(--sans);font-weight:600;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink)}
+.site-head nav a{font-size:15px;font-weight:500}
+
+/* display */
+.hero h1{font-weight:300;letter-spacing:-.015em}
+.h2{font-size:clamp(38px,4vw,52px);letter-spacing:-.01em}
+.ptitle{font-size:30px;line-height:1.15}
+.ptitle em{font-style:normal;color:inherit}
+.about-lead{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1.3}
+.contact-mail{font-size:clamp(34px,4.4vw,52px)}
+
+/* text */
+.disc h3{font-family:var(--sans);font-weight:600;font-size:16px;line-height:1.4;margin:0 0 6px}
+.disc p,.pdesc,.ai-line,.hero-foot p{font-size:16px}
+.ai-line b{font-weight:600}
+.facts{font-size:15px}
+.contact-note,.strip-text{font-size:16px}
+.tags{margin-top:2px}
+
+/* Hero portrait: the same round photo as the CV header */
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,5vw,72px);align-items:center}
+.hero-top h1{margin-top:28px}
+.hero-portrait{width:290px;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover}
+/* About: me at work instead of a second portrait */
+.about-photo.about-work{width:100%;max-width:300px;height:auto;aspect-ratio:2/3;border-radius:0;object-fit:cover}
+@media (max-width:900px){
+  .hero-top{grid-template-columns:1fr}
+  .hero-portrait{order:-1;width:140px}
 }
