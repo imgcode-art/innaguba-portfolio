@@ -20,12 +20,7 @@
 .ai-line{margin-top:40px;padding:18px 22px;background:var(--frame);border-left:2px solid var(--walnut);font-size:16px}
 .ai-line b{font-weight:500;color:var(--ink)}
 
-/* Filters */
 .work-head{flex-wrap:wrap;gap:16px 32px}
-.filters{display:flex;flex-wrap:wrap;gap:8px}
-.filters button{font:inherit;font-size:14px;padding:8px 16px;border:1px solid var(--line);background:none;color:var(--ink);cursor:pointer;transition:border-color .2s ease,background .2s ease,color .2s ease}
-.filters button:hover{border-color:var(--ink)}
-.filters button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
 /* Project grid: every project the same size, whatever the discipline */
 .pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(44px,5vw,64px) clamp(28px,3vw,40px)}
@@ -80,13 +75,12 @@
 body{font-size:16px;line-height:1.7}
 
 /* the eyebrow */
-.label,.hero .label,.kind,.tags,.band-night .kicker,.contact .label,.btn,.filters button,.reviews-label{
+.label,.hero .label,.kind,.tags,.band-night .kicker,.contact .label,.btn,.reviews-label{
   font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
 .label,.kind,.tags{color:var(--mute)}
 .hero .label{color:var(--walnut)}
 .contact .label{color:var(--walnut)}
 .btn{padding:17px 28px}
-.filters button{padding:9px 16px;letter-spacing:.12em}
 
 /* header: wordmark set like the CV name */
 .site-head .name{font-family:var(--sans);font-weight:600;font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink)}
