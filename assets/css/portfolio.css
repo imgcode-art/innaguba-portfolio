@@ -118,3 +118,6 @@ body{font-size:16px;line-height:1.7}
   .hero-top{grid-template-columns:1fr}
   .hero-portrait{order:-1;width:140px}
 }
+
+/* Display headings: balanced lines, so no word is left alone on a line (e.g. "They" before an italic phrase) */
+h1,h2,.h2,.ptitle,.cs-hero h1,.cs h2,.callout,.band-night .lead,.about-lead{text-wrap:balance}
