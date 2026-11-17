@@ -8,7 +8,7 @@
   --sand-line:#D6D2CB; --night-line:#3A3A3A; --night-mute:#9C9C9C; --night-text:#C8C8C8; --head-bg:rgba(255,255,255,.92); --shadow:28,28,28;
 }
 
-.hero h1{max-width:1100px;font-size:clamp(50px,8vw,104px)}
+.hero h1{max-width:none;font-size:clamp(44px,6.2vw,88px)}
 .hero-actions{display:flex;flex-direction:column;align-items:center;gap:18px}
 .hero-actions .btn{width:290px;text-align:center}
 
@@ -17,24 +17,49 @@
 .disc li{padding-top:18px;border-top:1px solid var(--line)}
 .disc h3{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;color:var(--ink)}
 .disc p{font-size:15px}
-.ai-line{margin-top:40px;padding:18px 22px;background:var(--frame);border-left:2px solid var(--walnut);font-size:16px}
-.ai-line b{font-weight:500;color:var(--ink)}
 
 .work-head{flex-wrap:wrap;gap:16px 32px}
 
-/* Project grid: every project the same size, whatever the discipline */
-.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(44px,5vw,64px) clamp(28px,3vw,40px)}
-.pcard{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--body)}
-.pcard[hidden]{display:none}
-.pmedia{display:block;aspect-ratio:3/2;overflow:hidden;margin-bottom:8px;background:var(--frame)}
-.pmedia img,.pmedia video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-.pmedia.frame{padding:clamp(14px,2vw,26px)}
-.pmedia.frame img{object-fit:contain}
-.pcard:hover .pmedia img,.pcard:hover .pmedia video{transform:scale(1.02)}
-.tags{font-size:14px;color:var(--mute)}
-.ptitle{font-family:var(--serif);font-weight:300;font-size:clamp(28px,2.6vw,36px);line-height:1.12;letter-spacing:-.01em;color:var(--ink)}
-.ptitle em{color:var(--walnut)}
-.pdesc{font-size:16px;max-width:520px}
+/* Project grid: two columns, every card the same 3:2 size, the filter stands still between them */
+.wx{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.5fr) minmax(0,1fr);column-gap:clamp(24px,3vw,48px);align-items:start}
+.wx-col{display:flex;flex-direction:column;gap:clamp(72px,9vw,128px)}
+.wx-l{grid-column:1;grid-row:1}
+.wx-r{grid-column:3;grid-row:1}
+.wx-pool{display:none}
+/* without JS the cards stay in the pool: show it as a plain two-column grid */
+html:not(.js) .wx{display:block}
+html:not(.js) .wx-filter{display:none}
+html:not(.js) .wx-pool{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(56px,7vw,96px) clamp(24px,3vw,48px)}
+.wx-filter{grid-column:2;grid-row:1;position:sticky;top:calc(50vh - 80px);align-self:start;display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding-left:clamp(0px,1.5vw,24px)}
+.wx-filter button{all:unset;cursor:pointer;font-family:var(--sans);font-weight:400;font-size:clamp(20px,1.7vw,24px);line-height:1.35;letter-spacing:-.01em;color:#8C8C8C;white-space:nowrap;transition:color .25s}
+.wx-filter button:hover{color:var(--ink)}
+.wx-filter button[aria-pressed="true"]{color:var(--ink)}
+.wx-filter button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+
+.wcard{display:block;text-decoration:none;color:var(--body)}
+.wmedia{display:block;aspect-ratio:3/2;overflow:hidden;background:var(--frame)}
+.wmedia img,.wmedia video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+/* website cards: a plain screenshot from the top of the page, same 3:2 box as the photos; hairline so white pages keep their edge */
+.wmedia.shot{outline:1px solid var(--line);outline-offset:-1px}
+.wmedia.shot img{object-position:top}
+.wcard:hover .wmedia img,.wcard:hover .wmedia video{transform:scale(1.025)}
+.wmeta{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:16px}
+.wname{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2vw,28px);line-height:1.15;color:var(--ink)}
+.wtag{font-size:13px;color:var(--mute);white-space:nowrap}
+.wline{display:block;margin-top:4px;font-size:15px;color:var(--mute)}
+
+::view-transition-group(*){animation-duration:.45s;animation-timing-function:cubic-bezier(.2,.7,.2,1)}
+
+/* Tablet & phone: filter becomes a sticky row, one column */
+@media (max-width:900px){
+  .wx{display:block}
+  .wx-filter{position:sticky;top:var(--head-h,60px);z-index:5;flex-direction:row;flex-wrap:nowrap;overflow-x:auto;gap:20px;padding:14px 0;margin:0 0 32px;background:var(--paper);border-bottom:1px solid var(--line);scrollbar-width:none}
+  .wx-filter button{font-size:17px;white-space:nowrap}
+  html:not(.js) .wx-pool{grid-template-columns:1fr}
+  .wx-col{gap:56px}
+  .wx-l{margin-bottom:56px}
+}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*){animation:none}}
 
 /* Photography band */
 .strip3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);max-width:960px;margin:clamp(40px,5vw,56px) auto 0}
@@ -49,7 +74,6 @@
   .disc{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
-  .pgrid{grid-template-columns:1fr}
 }
 @media (max-width:640px){
   .hero-actions{align-self:stretch}
@@ -75,9 +99,9 @@
 body{font-size:16px;line-height:1.7}
 
 /* the eyebrow */
-.label,.hero .label,.kind,.tags,.band-night .kicker,.contact .label,.btn,.reviews-label{
+.label,.hero .label,.kind,.band-night .kicker,.contact .label,.btn,.reviews-label{
   font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.5}
-.label,.kind,.tags{color:var(--mute)}
+.label,.kind{color:var(--mute)}
 .hero .label{color:var(--walnut)}
 .contact .label{color:var(--walnut)}
 .btn{padding:17px 28px}
@@ -89,29 +113,18 @@ body{font-size:16px;line-height:1.7}
 /* display */
 .hero h1{font-weight:300;letter-spacing:-.015em}
 .h2{font-size:clamp(38px,4vw,52px);letter-spacing:-.01em}
-.ptitle{font-size:30px;line-height:1.15}
-.ptitle em{font-style:normal;color:inherit}
 .about-lead{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1.3}
 .contact-mail{font-size:clamp(34px,4.4vw,52px)}
 
 /* text */
 .disc h3{font-family:var(--sans);font-weight:600;font-size:16px;line-height:1.4;margin:0 0 6px}
-.disc p,.pdesc,.ai-line,.hero-foot p{font-size:16px}
-.ai-line b{font-weight:600}
+.disc p,.hero-foot p{font-size:16px}
 .facts{font-size:15px}
 .contact-note,.strip-text{font-size:16px}
-.tags{margin-top:2px}
 
-/* Hero portrait: the same round photo as the CV header */
-.hero-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,5vw,72px);align-items:center}
+/* Hero: no portrait, the headline runs across the full width in two lines; her photo is in About */
 .hero-top h1{margin-top:28px}
-.hero-portrait{width:290px;height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover}
-/* About: me at work instead of a second portrait */
-.about-photo.about-work{width:100%;max-width:300px;height:auto;aspect-ratio:2/3;border-radius:0;object-fit:cover}
-@media (max-width:900px){
-  .hero-top{grid-template-columns:1fr}
-  .hero-portrait{order:-1;width:140px}
-}
+.hero h1 em{display:block}
 
 /* Display headings: balanced lines, so no word is left alone on a line (e.g. "They" before an italic phrase) */
-h1,h2,.h2,.ptitle,.cs-hero h1,.cs h2,.callout,.band-night .lead,.about-lead{text-wrap:balance}
+h2,.h2,.cs-hero h1,.cs h2,.callout,.band-night .lead,.about-lead{text-wrap:balance}

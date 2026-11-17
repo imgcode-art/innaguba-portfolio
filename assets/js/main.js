@@ -120,3 +120,34 @@ if (/[?&]theme=warm\b/.test(location.search)) document.documentElement.setAttrib
   marks.forEach(function (m) { io.observe(m); });
 })();
 
+// Project filter: visible cards alternate between the two columns; the category lives in the URL (?work=web)
+(function () {
+  var root = document.querySelector('.wx');
+  if (!root) return;
+  var cards = [].slice.call(root.querySelectorAll('.wcard'));
+  var buttons = [].slice.call(root.querySelectorAll('.wx-filter button'));
+  var left = root.querySelector('.wx-l'), right = root.querySelector('.wx-r'), pool = root.querySelector('.wx-pool');
+  var single = window.matchMedia('(max-width:900px)');
+  cards.forEach(function (c, i) { c.style.viewTransitionName = 'w' + i; });
+  function layout(cat) {
+    var shown = cards.filter(function (c) { return cat === 'all' || c.dataset.cats.split(' ').indexOf(cat) > -1; });
+    cards.forEach(function (c) { if (shown.indexOf(c) < 0) pool.appendChild(c); });
+    // one column on phones keeps the reading order; two columns alternate left, right
+    shown.forEach(function (c, i) { (single.matches || i % 2 === 0 ? left : right).appendChild(c); });
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cat === cat ? 'true' : 'false'); });
+  }
+  function current() { var m = location.search.match(/[?&]work=(\w+)/); return m && buttons.some(function (b) { return b.dataset.cat === m[1]; }) ? m[1] : 'all'; }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var cat = b.dataset.cat;
+      history.replaceState(null, '', cat === 'all' ? location.pathname + location.hash : '?work=' + cat + location.hash);
+      if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.startViewTransition(function () { layout(cat); });
+      else layout(cat);
+      // a shorter list must not leave the reader below the grid
+      var top = root.getBoundingClientRect().top;
+      if (top < 0) window.scrollTo({ top: top + scrollY - 120, behavior: 'instant' });
+    });
+  });
+  single.addEventListener('change', function () { layout(current()); });
+  layout(current());
+})();
