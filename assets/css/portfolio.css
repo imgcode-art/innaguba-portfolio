@@ -125,6 +125,8 @@ body{font-size:16px;line-height:1.7}
 /* Hero: no portrait, the headline runs across the full width in two lines; her photo is in About */
 .hero-top h1{margin-top:28px}
 .hero h1 em{display:block}
+/* About: me at work, a plain 2:3 rectangle like the rest of the photos */
+.about-photo.about-work{width:100%;max-width:300px;height:auto;aspect-ratio:2/3;border-radius:0;object-fit:cover}
 
 /* Display headings: balanced lines, so no word is left alone on a line (e.g. "They" before an italic phrase) */
 h2,.h2,.cs-hero h1,.cs h2,.callout,.band-night .lead,.about-lead{text-wrap:balance}
