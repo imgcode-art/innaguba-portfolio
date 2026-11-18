@@ -13,10 +13,16 @@
 .hero-actions .btn{width:290px;text-align:center}
 
 /* What I do: five disciplines on one line, numbered, hairline on top */
-.disc{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(20px,2.4vw,32px);margin:40px 0 0;padding:0}
-.disc li{padding-top:18px;border-top:1px solid var(--line)}
-.disc h3{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.15;color:var(--ink)}
-.disc p{font-size:15px}
+/* What I do: heading on the left, the same three disciplines as the work filter on the right */
+.disc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);column-gap:clamp(32px,5vw,80px);align-items:start}
+.disc-grid .h2{margin:0}
+.disc{list-style:none;margin:0;padding:0}
+.disc li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);column-gap:clamp(24px,3vw,48px);padding:28px 0 30px;border-top:1px solid var(--line)}
+/* lines only between the disciplines, the section rules already frame the block */
+.disc li:first-child{border-top:0;padding-top:0}
+.disc li:last-child{padding-bottom:0}
+.disc h3{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.4vw,32px);line-height:1.15;color:var(--ink)}
+.disc p{margin:0;max-width:52ch}
 
 .work-head{flex-wrap:wrap;gap:16px 32px}
 
@@ -71,14 +77,15 @@ html:not(.js) .wx-pool{display:grid;grid-template-columns:repeat(2,minmax(0,1fr)
 .site-foot .foot-bar{border-top:0;padding-top:32px}
 
 @media (max-width:1000px){
-  .disc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .disc-grid{grid-template-columns:1fr}
+  .disc-grid .h2{margin-bottom:36px}
 }
 @media (max-width:760px){
 }
 @media (max-width:640px){
   .hero-actions{align-self:stretch}
   .hero-actions .btn{width:100%;white-space:normal}
-  .disc{grid-template-columns:1fr}
+  .disc li{grid-template-columns:1fr;row-gap:10px}
   .strip3 img:nth-child(3){display:none}
   .strip3{grid-template-columns:1fr 1fr}
 }
@@ -117,7 +124,6 @@ body{font-size:16px;line-height:1.7}
 .contact-mail{font-size:clamp(34px,4.4vw,52px)}
 
 /* text */
-.disc h3{font-family:var(--sans);font-weight:600;font-size:16px;line-height:1.4;margin:0 0 6px}
 .disc p,.hero-foot p{font-size:16px}
 .facts{font-size:15px}
 .contact-note,.strip-text{font-size:16px}
