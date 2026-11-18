@@ -125,6 +125,8 @@ body{font-size:16px;line-height:1.7}
 
 /* text */
 .disc p,.hero-foot p{font-size:16px}
+/* short three-line intro: balance the lines so none runs past the others (Safari/Chrome wrap it differently at every width) */
+.hero-foot p{text-wrap:balance}
 .facts{font-size:15px}
 .contact-note,.strip-text{font-size:16px}
 
